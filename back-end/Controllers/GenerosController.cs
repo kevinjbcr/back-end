@@ -9,7 +9,7 @@ namespace back_end.Controllers
 {
     [Route("api/generos")]
     [ApiController]
-    public class GenerosController: ControllerBase
+    public class GenerosController : ControllerBase
     {
         private readonly ILogger<GenerosController> logger;
         private readonly ApplicationDbContext context;
@@ -28,7 +28,7 @@ namespace back_end.Controllers
             var queryable = context.Generos.AsQueryable();
             await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
             var generos = await queryable.OrderBy(x => x.Nombre).Paginar(paginacionDTO).ToListAsync();
-            return mapper.Map<List<Genero>>(generos);   
+            return mapper.Map<List<Genero>>(generos);
         }
 
         [HttpGet("{Id:int}")]
@@ -36,7 +36,7 @@ namespace back_end.Controllers
         {
             var genero = await context.Generos.FirstOrDefaultAsync(x => x.Id == Id);
 
-            if(genero == null)
+            if (genero == null)
             {
                 return NotFound();
             }
@@ -54,7 +54,7 @@ namespace back_end.Controllers
 
         }
 
-        [HttpPut("Id:int")]
+        [HttpPut("{Id:int}")]
         public async Task<ActionResult> Put(int Id, [FromBody] GeneroCreacionDTO generoCreacionDTO)
         {
             var genero = await context.Generos.FirstOrDefaultAsync(x => x.Id == Id);
