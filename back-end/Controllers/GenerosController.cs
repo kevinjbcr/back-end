@@ -70,10 +70,19 @@ namespace back_end.Controllers
 
         }
 
-        [HttpDelete]
-        public ActionResult Delete([FromBody] Genero genero)
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
         {
-            throw new NotImplementedException();
+            var existe = await context.Generos.AnyAsync(x => x.Id == id);
+
+            if (!existe)
+            {
+                return NotFound();
+            }
+
+            context.Remove(new Genero() { Id = id });
+            await context.SaveChangesAsync();
+            return NoContent();
 
         }
     }
