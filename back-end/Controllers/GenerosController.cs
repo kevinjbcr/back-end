@@ -27,7 +27,7 @@ namespace back_end.Controllers
         {
             var queryable = context.Generos.AsQueryable();
             await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
-            var generos = await queryable.OrderBy(x => x.Nombre).Paginar(paginacionDTO).ToListAsync();
+            var generos = await queryable.OrderBy(x => x.Id).Paginar(paginacionDTO).ToListAsync();
             return mapper.Map<List<Genero>>(generos);
         }
 
