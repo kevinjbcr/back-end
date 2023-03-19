@@ -21,7 +21,7 @@ namespace back_end
 
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosLocal>();
+            services.AddTransient<IAlmacenadorArchivos,AlmacenadorAzureStorage>();
             services.AddHttpContextAccessor();
 
             services.AddDbContext<ApplicationDbContext>(options =>
