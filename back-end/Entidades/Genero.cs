@@ -10,5 +10,7 @@ namespace back_end.Entidades
         [StringLength(maximumLength:50)]
         [PrimeraLetraMayusculaAtrtribute]
         public string Nombre { get; set; }
+        public List<PeliculasGeneros> PeliculasGeneros { get; set; }
+
     }
 }
