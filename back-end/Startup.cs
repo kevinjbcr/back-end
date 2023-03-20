@@ -1,8 +1,11 @@
 ﻿
 
+using AutoMapper;
 using back_end.Utilidades;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 
 namespace back_end
 {
@@ -21,11 +24,23 @@ namespace back_end
 
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddTransient<IAlmacenadorArchivos,AlmacenadorAzureStorage>();
+            services.AddSingleton(provider =>
+
+                new MapperConfiguration(config =>
+                {
+                    var geometryFactory = provider.GetRequiredService<GeometryFactory>();
+                    config.AddProfile(new AutoMapperProfiles(geometryFactory));
+                }).CreateMapper());
+
+            services.AddSingleton<GeometryFactory>(NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326));
+
+            services.AddTransient<IAlmacenadorArchivos, AlmacenadorAzureStorage>();
             services.AddHttpContextAccessor();
 
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("defaultConnection"))); 
+            options.UseSqlServer(Configuration.GetConnectionString("defaultConnection"),
+            sqlServer => sqlServer.UseNetTopologySuite()));
+
 
             services.AddCors(options =>
             {

@@ -15,5 +15,8 @@ namespace back_end
         //Genera la tabla de Actores de acuerdo a su modelo
         public DbSet<Actor> Actores { get; set; }
 
+        //Genera la tabla de Cines de acuerdo a su modelo
+        public DbSet<Cine> Cines { get; set; }
+
     }
 }
