@@ -36,7 +36,7 @@ namespace back_end.Controllers
         public async Task<ActionResult> Post([FromForm] ActorCreacionDTO actorCreacionDTO)
         {
             var actor = mapper.Map<Actor>(actorCreacionDTO);
-            if(actorCreacionDTO.Foto != null)
+            if (actorCreacionDTO.Foto != null)
             {
                 actor.Foto = await almacenadorArchivos.GuadarArchivo(contenedor, actorCreacionDTO.Foto);
             }
@@ -46,15 +46,16 @@ namespace back_end.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<ActorDTO>>Get(int id)
+        public async Task<ActionResult<ActorDTO>> Get(int id)
         {
             var actor = await context.Actores.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (actor == null) {
+            if (actor == null)
+            {
                 return NotFound();
-            }  
+            }
 
-            return mapper.Map<ActorDTO>(actor); 
+            return mapper.Map<ActorDTO>(actor);
         }
 
         [HttpPut("{id:int}")]
@@ -68,13 +69,24 @@ namespace back_end.Controllers
 
             actor = mapper.Map(actorCreacionDTO, actor);
 
-            if(actorCreacionDTO.Foto != null)
+            if (actorCreacionDTO.Foto != null)
             {
                 actor.Foto = await almacenadorArchivos.EditarArchivo(contenedor, actorCreacionDTO.Foto, actor.Foto);
             }
 
             await context.SaveChangesAsync();
             return NoContent();
+        }
+
+        [HttpPost("buscarPorNombre")]
+        public async Task<ActionResult<List<PeliculaActorDTO>>> BuscarPorNombre([FromBody]string nombre)
+        {
+            if (string.IsNullOrWhiteSpace(nombre)) { return new List<PeliculaActorDTO>(); }
+            return await context.Actores
+                .Where(x => x.Nombre.Contains(nombre))
+                .Select(x => new PeliculaActorDTO { Id = x.Id, Nombre = x.Nombre, Foto = x.Foto })
+                .Take(5)
+                .ToListAsync();
         }
 
         [HttpDelete("{id:int}")]
