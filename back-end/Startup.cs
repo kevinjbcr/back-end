@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
 namespace back_end
@@ -16,6 +17,7 @@ namespace back_end
     {
         public Startup(IConfiguration configuration)
         {
+            JwtSecurityTokenHandler.DefaultOutboundClaimTypeMap.Clear();
             Configuration = configuration;
         }
 
