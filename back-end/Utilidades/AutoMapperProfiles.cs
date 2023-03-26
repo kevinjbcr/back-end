@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using back_end.DTO;
 using back_end.Entidades;
+using Microsoft.AspNetCore.Identity;
 using NetTopologySuite.Geometries;
 
 namespace back_end.Utilidades
@@ -33,6 +34,8 @@ namespace back_end.Utilidades
                 .ForMember(x => x.Generos, opciones => opciones.MapFrom(MapearPeliculaGeneros))
                 .ForMember(x => x.Actores, opciones => opciones.MapFrom(MapearPeliculaActores))
                 .ForMember(x => x.Cines, opciones => opciones.MapFrom(MapearPeliculaCines));
+
+            CreateMap<IdentityUser, UsuarioDTO>();
 
         }
 
