@@ -1,5 +1,7 @@
 ﻿using back_end.DTO;
 using back_end.Entidades;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,8 +10,7 @@ using RouteAttribute = Microsoft.AspNetCore.Components.RouteAttribute;
 
 namespace back_end.Controllers
 {
-    [Route("/api/rating")]
-    [ApiController]
+    [Route("api/rating")]
     public class RatingsController : ControllerBase
     {
         private readonly UserManager<IdentityUser> userManager;
