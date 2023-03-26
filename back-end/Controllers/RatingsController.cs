@@ -13,6 +13,7 @@ namespace back_end.Controllers
 {
     [Microsoft.AspNetCore.Mvc.Route("api/rating")]
     [ApiController]
+
     public class RatingsController : ControllerBase
     {
         private readonly UserManager<IdentityUser> userManager;

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 namespace back_end.Controllers
 {
     [Route("api/peliculas")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "EsAdmin")]
     public class PeliculasController : ControllerBase
     {
         private readonly ApplicationDbContext context;

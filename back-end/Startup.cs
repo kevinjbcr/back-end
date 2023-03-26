@@ -73,6 +73,11 @@ namespace back_end
             }
             );
 
+            services.AddAuthorization(opciones =>
+            {
+                opciones.AddPolicy("EsAdmin", policy => policy.RequireClaim("roles", "admin"));
+            });
+
             services.AddControllers();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
