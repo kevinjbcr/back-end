@@ -17,7 +17,7 @@ namespace back_end
     {
         public Startup(IConfiguration configuration)
         {
-            JwtSecurityTokenHandler.DefaultOutboundClaimTypeMap.Clear();
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             Configuration = configuration;
         }
 
