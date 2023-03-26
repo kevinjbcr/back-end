@@ -75,7 +75,7 @@ namespace back_end
 
             services.AddAuthorization(opciones =>
             {
-                opciones.AddPolicy("EsAdmin", policy => policy.RequireClaim("roles", "admin"));
+                opciones.AddPolicy("EsAdmin", policy => policy.RequireClaim("role", "admin"));
             });
 
             services.AddControllers();
