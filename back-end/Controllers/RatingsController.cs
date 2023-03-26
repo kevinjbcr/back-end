@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RouteAttribute = Microsoft.AspNetCore.Components.RouteAttribute;
+
+
 
 namespace back_end.Controllers
 {
-    [Route("api/rating")]
+    [Microsoft.AspNetCore.Mvc.Route("api/rating")]
+    [ApiController]
     public class RatingsController : ControllerBase
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -22,6 +24,7 @@ namespace back_end.Controllers
             this.context = context;
         }
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult> Post([FromBody] RatingDTO ratingDTO)
         {
             var email = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "email").Value;
