@@ -1,6 +1,7 @@
 ﻿
 
 using AutoMapper;
+using back_end.Filtros;
 using back_end.Utilidades;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -78,7 +79,10 @@ namespace back_end
                 opciones.AddPolicy("EsAdmin", policy => policy.RequireClaim("role", "admin"));
             });
 
-            services.AddControllers();
+            services.AddControllers(options => {
+                options.Filters.Add(typeof(FiltroDeExcepcion));
+            });
+            services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();

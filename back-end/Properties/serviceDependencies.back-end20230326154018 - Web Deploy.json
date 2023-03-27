@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/back-endmoviesdbserver/databases/back-end_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:connectionString:AzureStorage",
+      "dynamicId": null
+    },
+    "storage1": {
+      "ignored": "true",
+      "type": "storage",
+      "connectionId": "connectionStrings:AzureStorage"
+    },
+    "apis1": {
+      "ignored": "true",
+      "type": "apis.azure"
+    },
+    "identityapp1": {
+      "ignored": "true",
+      "type": "identityapp"
+    },
+    "appInsights1": {
+      "ignored": "true",
+      "type": "appInsights",
+      "connectionId": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+      "dynamicId": null
+    },
+    "secrets1": {
+      "ignored": "true",
+      "type": "secrets"
+    }
+  }
+}

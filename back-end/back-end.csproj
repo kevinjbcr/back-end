@@ -5,11 +5,14 @@
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>back_end</RootNamespace>
+    <ApplicationInsightsResourceId>/subscriptions/9b9378c6-5812-4f99-a08f-bb692f2fe688/resourceGroups/PeliculasAPI/providers/microsoft.insights/components/back-end</ApplicationInsightsResourceId>
+    <UserSecretsId>24550cef-e347-497d-a341-b16d9c5e94be</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="Azure.Storage.Blobs" Version="12.15.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.4" />
